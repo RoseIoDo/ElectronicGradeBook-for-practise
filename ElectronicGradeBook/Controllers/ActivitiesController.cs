@@ -1,0 +1,72 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ElectronicGradeBook.Data;
+using ElectronicGradeBook.Models;
+using ElectronicGradeBook.Models.Entities.ActivityPrivilege;
+using ElectronicGradeBook.Models.ViewModels;
+using ElectronicGradeBook.Services.Interfaces;
+
+namespace ElectronicGradeBook.Controllers
+{
+    [Route("[controller]/[action]")]
+    public class ActivitiesController : Controller
+    {
+        private readonly IActivityService _service;
+        public ActivitiesController(IActivityService service)
+        {
+            _service = service;
+        }
+
+        [HttpGet]
+        public IActionResult Index() => View();
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var list = await _service.GetAllAsync();
+            return Json(list);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody] ActivityViewModel model)
+        {
+            try
+            {
+                var created = await _service.CreateAsync(model);
+                return Json(new { success = true, data = created });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit([FromBody] ActivityViewModel model)
+        {
+            try
+            {
+                var updated = await _service.UpdateAsync(model);
+                return Json(new { success = true, data = updated });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _service.DeleteAsync(id);
+                return Json(new { success = true, message = "Активність видалено." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+    }
+}

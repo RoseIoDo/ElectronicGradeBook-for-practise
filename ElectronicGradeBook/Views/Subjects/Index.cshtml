@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Предмети";
+}
+
+<div class="card-glass p-4 fade-up">
+    <h2 class="mb-3">ПРЕДМЕТИ</h2>
+
+    <table class="table table-custom" id="subjectsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Повна назва</th>
+                <th>Коротка назва</th>
+                <th>Код</th>
+                <th>Вибірковий</th>
+                <th>Цикл</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div class="text-end mt-3">
+        <button class="btn btn-primary btn-anim" id="addSubjectBtn">
+            <i class="fas fa-plus me-1"></i> Додати предмет
+        </button>
+    </div>
+</div>
+
+<!-- Модалка -->
+<div class="modal fade" id="subjectModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="subjectModalLabel" class="modal-title"></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="subjectId" />
+                <div class="mb-3">
+                    <label for="fullName" class="form-label">Повна назва</label>
+                    <input type="text" class="form-control" id="fullName" />
+                </div>
+                <div class="mb-3">
+                    <label for="shortName" class="form-label">Коротка назва</label>
+                    <input type="text" class="form-control" id="shortName" />
+                </div>
+                <div class="mb-3">
+                    <label for="code" class="form-label">Код</label>
+                    <input type="text" class="form-control" id="code" />
+                </div>
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="isElective" />
+                    <label class="form-check-label" for="isElective">Вибірковий</label>
+                </div>
+                <div class="mb-3">
+                    <label for="cycleType" class="form-label">Цикл</label>
+                    <input type="text" class="form-control" id="cycleType" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-light" data-bs-dismiss="modal">Закрити</button>
+                <button class="btn btn-primary" id="saveSubjectBtn">Зберегти</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/subjects.js"></script>
+}

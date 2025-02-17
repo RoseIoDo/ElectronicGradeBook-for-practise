@@ -1,0 +1,88 @@
+﻿@using ElectronicGradeBook.Models.ViewModels
+@{
+    ViewData["Title"] = "Спеціальності";
+}
+
+<div class="card-glass p-4 fade-up">
+    <h2 class="mb-3">СПЕЦІАЛЬНОСТІ</h2>
+
+    <table class="table table-custom" id="specialtiesTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Назва</th>
+                <th>Коротка назва</th>
+                <th>Код спеціальності</th>
+                <th>Факультет</th>
+                <th>Програма</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            @* Дані для таблиці можуть завантажуватися AJAX‑ом (як у методі GetAll) *@
+        </tbody>
+    </table>
+
+    <div class="text-end mt-3">
+        <button class="btn btn-primary btn-anim" id="addSpecialtyBtn">
+            <i class="fas fa-plus me-1"></i> Додати
+        </button>
+    </div>
+</div>
+
+<!-- Модальне вікно -->
+<div class="modal fade" id="specialtyModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="specialtyModalLabel" class="modal-title"></h5>
+                <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="specId" />
+                <div class="mb-3">
+                    <label for="specName" class="form-label">Назва</label>
+                    <input type="text" class="form-control" id="specName" />
+                </div>
+                <div class="mb-3">
+                    <label for="shortName" class="form-label">Коротка назва</label>
+                    <input type="text" class="form-control" id="shortName" />
+                </div>
+                <div class="mb-3">
+                    <label for="code" class="form-label">Код спеціальності</label>
+                    <input type="number" class="form-control" id="code" />
+                </div>
+                <div class="mb-3">
+                    <label for="facultySelect" class="form-label">Факультет</label>
+                    <select id="facultySelect" class="form-select">
+                        <option value="">Оберіть факультет</option>
+                        @foreach (var f in ViewBag.Faculties as List<ElectronicGradeBook.Models.ViewModels.FacultyViewModel>)
+
+                        {
+                            <option value="@f.Id">@f.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="programSelect" class="form-label">Освітня програма</label>
+                    <select id="programSelect" class="form-select">
+                        <option value="">Оберіть програму</option>
+                        @foreach (var p in ViewBag.Programs as List<ElectronicGradeBook.Models.ViewModels.StudyProgramViewModel>)
+
+                        {
+                            <option value="@p.Id">@p.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-light" data-bs-dismiss="modal">Закрити</button>
+                <button class="btn btn-primary" id="saveSpecialtyBtn">Зберегти</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/specialties.js"></script>
+}

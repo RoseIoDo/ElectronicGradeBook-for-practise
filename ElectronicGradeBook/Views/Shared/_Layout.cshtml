@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - E-GradeBook</title>
+
+    <!-- Bootstrap 5 (темна тема, наприклад Cyborg або Darkly) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.0/dist/darkly/bootstrap.min.css" />
+
+    <!-- Font Awesome (для іконок) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <!-- Кастомний CSS -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark shadow animate__animated animate__fadeInDown"
+             style="background: linear-gradient(90deg, #0a58ca, #0146a8 100%);">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold" href="@Url.Action("Index", "Home")">
+                    <i class="fas fa-book-open me-2"></i> E-GradeBook
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarMain" aria-controls="navbarMain"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <!-- Ліве меню -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- ДОВІДНИКИ -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="masterDataDropdown"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-database"></i> Довідники
+                            </a>
+                            <ul class="dropdown-menu border-0 shadow">
+                                <li><a class="dropdown-item" href="@Url.Action("Index", "Faculties")">Інститути</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Index", "StudyPrograms")">Освітні програми</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Index", "Specialties")">Спеціальності</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Index", "Groups")">Групи</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Index", "SubjectSubgroups")">Підгрупи</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Index", "Students")">Студенти</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Index", "Teachers")">Викладачі</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Index", "Subjects")">Предмети</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- НАВЧАЛЬНИЙ ПРОЦЕС -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="acadDropdown"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-chalkboard-teacher"></i> Навч. процес
+                            </a>
+                            <ul class="dropdown-menu border-0 shadow">
+                                <li><a class="dropdown-item" href="@Url.Action("Index", "SubjectOfferings")">Предмет-Викладання</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Index", "Grades")">Оцінки</a></li>
+                                <!-- Нове: GradeBook (сторінка із заліковкою) -->
+                                <li><a class="dropdown-item" href="@Url.Action("Index", "GradeBook")">Залікова книга</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- АКТИВНОСТІ, ПІЛЬГИ -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="extraDropdown"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-star"></i> Активності/Пільги
+                            </a>
+                            <ul class="dropdown-menu border-0 shadow">
+                                <li><a class="dropdown-item" href="@Url.Action("Index", "Activities")">Activities</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Index", "StudentActivities")">Студ.Активності</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Index", "Privileges")">Privileges</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("Index", "StudentPrivileges")">Студ.Привілеї</a></li>
+                            </ul>
+                        </li>
+
+                        @if (User.IsInRole("Admin"))
+
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="usersDropdown"
+                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-users-cog"></i> Користувачі / Доступи
+                                </a>
+                                <ul class="dropdown-menu border-0 shadow">
+                                    <li><a class="dropdown-item" href="@Url.Action("Index", "Users")">Users</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("Index", "AccessPermissions")">AccessPermissions</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("Index", "Modules")">Modules</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("Index", "UserModules")">UserModules</a></li>
+                                </ul>
+                            </li>
+                        }
+                        @if (User.IsInRole("Admin"))
+
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="rolesDropdown"
+                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user-shield"></i> Ролі
+                                </a>
+                                <ul class="dropdown-menu border-0 shadow">
+                                    <li><a class="dropdown-item" href="@Url.Action("Index","Roles")">Список ролей</a></li>
+                                    <li><a class="dropdown-item" href="@Url.Action("Index","UserRoles")">Призначення ролей</a></li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+
+                    <!-- ПРАВОРУЧ: акаунт -->
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Якщо користувач увійшов -->
+                        @if (User.Identity.IsAuthenticated)
+
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white" href="#"
+                                   id="userDropdown" role="button" data-bs-toggle="dropdown"
+                                   aria-expanded="false">
+                                    <i class="fas fa-user-circle"></i>
+                                    @User.Identity.Name
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end border-0 shadow">
+                                    <li><a class="dropdown-item" asp-controller="Account" asp-action="Logout">Вийти</a></li>
+                                </ul>
+                            </li>
+                        }
+
+                        else
+
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Account" asp-action="Login">
+                                    <i class="fas fa-sign-in-alt"></i> Увійти
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Account" asp-action="Register">
+                                    <i class="fas fa-user-plus"></i> Реєстрація
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Головна зона -->
+    <main class="flex-shrink-0 p-4 animate__animated animate__fadeInUp">
+        <div class="container mt-3">
+            @RenderBody()
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer class="footer mt-auto py-3 text-light"
+            style="background-color: rgba(0,0,0,0.75);">
+        <div class="container text-center">
+            <small>&copy; @(DateTime.Now.Year) E-GradeBook. Усі права захищено.</small>
+        </div>
+    </footer>
+
+    <!-- JS (Bootstrap, jQuery) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Ваш кастомний JS -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

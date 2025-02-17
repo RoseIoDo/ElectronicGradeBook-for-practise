@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Reports";
+}
+
+<h2>Генерація звітів</h2>
+
+<div class="mb-3">
+    <label>Group ID:</label>
+    <input type="number" id="groupIdInput" value="1" />
+    <label>Semester:</label>
+    <input type="number" id="semesterInput" value="2" />
+</div>
+
+<button class="btn btn-success" id="excelBtn">Excel</button>
+<button class="btn btn-danger" id="pdfBtn">PDF</button>
+<button class="btn btn-primary" id="wordBtn">Word</button>
+
+@section Scripts {
+    <script>
+        $(document).ready(function(){
+            $("#excelBtn").click(function(){
+                var groupId = $("#groupIdInput").val();
+                var sem = $("#semesterInput").val();
+                window.location.href = `/Reports/GradeBookExcel?groupId=${groupId}&semester=${sem}`;
+            });
+
+            $("#pdfBtn").click(function(){
+                var groupId = $("#groupIdInput").val();
+                var sem = $("#semesterInput").val();
+                window.location.href = `/Reports/GradeBookPdf?groupId=${groupId}&semester=${sem}`;
+            });
+
+            $("#wordBtn").click(function(){
+                var groupId = $("#groupIdInput").val();
+                var sem = $("#semesterInput").val();
+                window.location.href = `/Reports/GradeBookWord?groupId=${groupId}&semester=${sem}`;
+            });
+        });
+    </script>
+}

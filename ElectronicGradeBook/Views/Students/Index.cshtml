@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Студенти";
+}
+
+<div class="card-glass p-4 fade-up">
+    <h2 class="mb-3">СТУДЕНТИ</h2>
+
+    <table class="table table-custom" id="studentsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ПІБ</th>
+                <th>Дата зарахування</th>
+                <th>Дата випуску</th>
+                <th>Активний</th>
+                <th>Група</th>
+                <th>Дії</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @* Дані завантажуватимуться через AJAX *@
+        </tbody>
+    </table>
+
+    <div class="text-end mt-3">
+        <button class="btn btn-primary btn-anim" id="addStudentBtn">
+            <i class="fas fa-plus me-1"></i> Додати
+        </button>
+    </div>
+</div>
+
+<!-- Модальне вікно для студентів -->
+<div class="modal fade" id="studentModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="studentModalLabel" class="modal-title"></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="studentId" />
+                <div class="mb-3">
+                    <label for="fullName" class="form-label">ПІБ</label>
+                    <input type="text" class="form-control" id="fullName" />
+                </div>
+                @* Дати більше не вводяться вручну – вони встановлюються автоматично за даними групи *@
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="isActive" checked />
+                    <label class="form-check-label" for="isActive">Активний</label>
+                </div>
+                <div class="mb-3">
+                    <label for="groupSelect" class="form-label">Група</label>
+                    <select id="groupSelect" class="form-select">
+                        @* Опції завантажуються через AJAX із розмежуванням: спочатку Актуальні, потім Випущені групи *@
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-light" data-bs-dismiss="modal">Закрити</button>
+                <button class="btn btn-primary" id="saveStudentBtn">Зберегти</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/students.js"></script>
+}

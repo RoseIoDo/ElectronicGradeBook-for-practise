@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "SubjectOfferings";
+}
+
+<div class="card-glass p-4 fade-up">
+    <h2 class="mb-3">SubjectOfferings</h2>
+
+    <table class="table table-custom" id="soTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Предмет</th>
+                <th>Викладач</th>
+                <th>Групи (весь курс чи одна)</th>
+                <th>Курс</th>
+                <th>Семестр</th>
+                <th>Кредити</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <button class="btn btn-primary mt-3" id="addSoBtn">
+        <i class="fas fa-plus me-1"></i> Додати
+    </button>
+</div>
+
+<!-- Модальне вікно для створення/редагування Offering -->
+<div class="modal fade" id="soModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="soModalLabel" class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="soId" />
+
+                <div class="mb-2">
+                    <label class="form-label">Предмет</label>
+                    <select id="subjectSelect" class="form-select"></select>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Викладач</label>
+                    <select id="teacherSelect" class="form-select"></select>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Група (або «course-…»)</label>
+                    <select id="groupSelect" class="form-select">
+                        <!-- Наповниться loadGroupsForDropdown() -->
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Рік навчання</label>
+                    <select id="yearOfStudy" class="form-select"></select>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Семестр</label>
+                    <select id="semesterInYear" class="form-select"></select>
+                </div>
+                <div class="mb-2">
+                    <label class="form-label">Кредити</label>
+                    <input type="number" step="0.1" id="credits" class="form-control" value="0" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Закрити</button>
+                <button class="btn btn-primary" id="saveSoBtn">Зберегти</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/subjectOfferings.js"></script>
+}

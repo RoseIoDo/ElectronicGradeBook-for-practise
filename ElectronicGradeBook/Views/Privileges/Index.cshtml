@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Привілеї";
+}
+
+<div class="card-glass p-4 fade-up">
+    <h2 class="mb-3">ПРИВІЛЕЇ / ПІЛЬГИ</h2>
+
+    <table class="table table-custom" id="privilegesTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Назва</th>
+                <th>Опис</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div class="text-end mt-3">
+        <button class="btn btn-primary btn-anim" id="addPrivilegeBtn">
+            <i class="fas fa-plus me-1"></i> Додати
+        </button>
+    </div>
+</div>
+
+<!-- Модалка -->
+<div class="modal fade" id="privilegeModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="privilegeModalLabel" class="modal-title"></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="privilegeId" />
+                <div class="mb-3">
+                    <label class="form-label">Назва</label>
+                    <input type="text" id="pName" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Опис</label>
+                    <textarea id="pDesc" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-light" data-bs-dismiss="modal">Закрити</button>
+                <button class="btn btn-primary" id="savePrivilegeBtn">Зберегти</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/privileges.js"></script>
+}

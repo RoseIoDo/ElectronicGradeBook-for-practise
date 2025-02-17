@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Факультети";
+}
+
+<div class="card-glass p-4 fade-up">
+    <h2 class="mb-3">Інститути</h2>
+
+    <table class="table table-custom" id="facultiesTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Назва інституту</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Заповнюється AJAX -->
+        </tbody>
+    </table>
+
+    <div class="text-end mt-3">
+        <button class="btn btn-primary btn-anim" id="addFacultyBtn">
+            <i class="fas fa-plus me-1"></i> Додати інститут
+        </button>
+    </div>
+</div>
+
+<!-- Модалка -->
+<div class="modal fade" id="facultyModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="facultyModalLabel" class="modal-title"></h5>
+                <button class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="facultyId" />
+                <div class="mb-3">
+                    <label for="facultyName" class="form-label">Назва</label>
+                    <input type="text" class="form-control" id="facultyName" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-light" data-bs-dismiss="modal">Закрити</button>
+                <button class="btn btn-primary" id="saveFacultyBtn">Зберегти</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/faculties.js"></script>
+}

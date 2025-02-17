@@ -1,0 +1,99 @@
+﻿@{
+    ViewData["Title"] = "Групи";
+}
+
+<div class="card-glass p-4 fade-up">
+    <h2 class="mb-3">ГРУПИ</h2>
+
+    <table class="table table-custom" id="groupsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Префікс</th>
+                <th>Номер</th>
+                <th>Курс / Роки</th>
+                <th>Рік вступу</th>
+                <th>Рік випуску</th>
+                <th>Спеціальність</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            @* Рядки будуть формуватись через AJAX *@
+        </tbody>
+    </table>
+
+    <div class="text-end mt-3">
+        <button class="btn btn-primary btn-anim" id="addGroupBtn">
+            <i class="fas fa-plus me-1"></i> Додати
+        </button>
+    </div>
+</div>
+
+<!-- Блок для оновлення академічного року -->
+<div class="card-glass p-4 fade-up mt-4">
+    <h2 class="mb-3">Оновлення академічного року</h2>
+    <div class="mb-3">
+        <label for="academicDate" class="form-label">Дата (YYYY-MM-DD):</label>
+        <input type="date" id="academicDate" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <button id="updateAcademicDateBtn" class="btn btn-info">Оновити за вказаною датою</button>
+        <button id="resetAcademicDateBtn" class="btn btn-secondary">Auto (поточна дата)</button>
+    </div>
+    <div id="academicUpdateResult"></div>
+</div>
+
+<!-- Модальне вікно для редагування/додавання групи -->
+<div class="modal fade" id="groupModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="groupModalLabel" class="modal-title"></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="groupId" />
+                <div class="mb-3">
+                    <label for="groupPrefix" class="form-label">Префікс</label>
+                    <input type="text" id="groupPrefix" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label for="groupNumber" class="form-label">Номер</label>
+                    <input type="number" id="groupNumber" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label for="currentStudyYear" class="form-label">Курс</label>
+                    <input type="number" id="currentStudyYear" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label for="enrollmentYear" class="form-label">Рік вступу</label>
+                    <input type="number" id="enrollmentYear" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label for="graduationYear" class="form-label">Рік випуску</label>
+                    <input type="number" id="graduationYear" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label for="specialtySelect" class="form-label">Спеціальність</label>
+                    <select id="specialtySelect" class="form-select">
+                        <option value="">Оберіть спеціальність</option>
+                        @foreach (var s in ViewBag.Specialties as List<ElectronicGradeBook.Models.ViewModels.SpecialtyViewModel>)
+
+                        {
+                            <option value="@s.Id" data-duration="@s.StudyProgramDuration">@s.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-light" data-bs-dismiss="modal">Закрити</button>
+                <button class="btn btn-primary" id="saveGroupBtn">Зберегти</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/groups.js"></script>
+}

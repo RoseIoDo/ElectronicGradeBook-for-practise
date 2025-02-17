@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Оцінки";
+}
+
+<div class="card-glass p-4 fade-up">
+    <h2 class="mb-3">ОЦІНКИ</h2>
+
+    <table class="table table-custom" id="gradesTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Предмет</th>
+                <th>Студент</th>
+                <th>Status</th>
+                <th>IsRetake</th>
+                <th>Дата оновл.</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div class="text-end mt-3">
+        <button class="btn btn-primary btn-anim" id="addGradeBtn">
+            <i class="fas fa-plus me-1"></i> Додати оцінку
+        </button>
+    </div>
+</div>
+
+<!-- Модалка -->
+<div class="modal fade" id="gradeModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="gradeModalLabel" class="modal-title"></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="gradeId" />
+                <div class="mb-3">
+                    <label class="form-label">SubjectOffering</label>
+                    <select id="offeringSelect" class="form-select"></select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Студент</label>
+                    <select id="studentSelect" class="form-select"></select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Status</label>
+                    <input type="text" id="status" class="form-control" />
+                </div>
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="isRetake" />
+                    <label class="form-check-label" for="isRetake">Перездача</label>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">GradeVersionJson</label>
+                    <textarea id="gradeVersionJson" class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-light" data-bs-dismiss="modal">Закрити</button>
+                <button class="btn btn-primary" id="saveGradeBtn">Зберегти</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/grades.js"></script>
+}

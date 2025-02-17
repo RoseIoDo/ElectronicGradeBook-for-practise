@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Студентські активності";
+}
+
+<div class="card-glass p-4 fade-up">
+    <h2 class="mb-3">СТУДЕНТСЬКІ АКТИВНОСТІ</h2>
+
+    <table class="table table-custom" id="saTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Студент</th>
+                <th>Активність</th>
+                <th>Дата</th>
+                <th>Семестр</th>
+                <th>Нотатки</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div class="text-end mt-3">
+        <button class="btn btn-primary btn-anim" id="addSaBtn">
+            <i class="fas fa-plus me-1"></i> Додати
+        </button>
+    </div>
+</div>
+
+<!-- Модалка -->
+<div class="modal fade" id="saModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="saModalLabel" class="modal-title"></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="saId" />
+                <div class="mb-3">
+                    <label>Студент</label>
+                    <select id="studentSelect" class="form-select"></select>
+                </div>
+                <div class="mb-3">
+                    <label>Активність</label>
+                    <select id="activitySelect" class="form-select"></select>
+                </div>
+                <div class="mb-3">
+                    <label>Дата</label>
+                    <input type="date" id="dateAwarded" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label>Семестр</label>
+                    <input type="text" id="semester" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label>Нотатки</label>
+                    <textarea id="notes" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline-light" data-bs-dismiss="modal">Закрити</button>
+                <button class="btn btn-primary" id="saveSaBtn">Зберегти</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/studentActivities.js"></script>
+}
